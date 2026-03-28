@@ -22,7 +22,6 @@ jobs:
       image-tag: ${{ github.ref_name }}
 
     # Datos sensibles: usuario y contraseña/token de Docker Hub (configurados en GitHub → Secrets)
-    uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
