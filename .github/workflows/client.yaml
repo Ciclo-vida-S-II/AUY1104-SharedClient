@@ -17,7 +17,7 @@ jobs:
 
     # Valores que le “pasamos” a la receta (nombre de la imagen y qué versión es)
     with:
-      image-name: my-api
+      image-name: demo-api
       # Mismo nombre que el tag que disparó el workflow (ej. v1.2.3 → la imagen lleva esa “versión”)
       image-tag: ${{ github.ref_name }}
 
