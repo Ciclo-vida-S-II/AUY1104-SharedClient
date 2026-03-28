@@ -1,10 +1,27 @@
+# ─────────────────────────────────────────────────────────────
+# Este archivo vive en el repo del alumno / del proyecto.
+# Cuando publicas una versión con etiqueta tipo v1.2.3, GitHub ejecuta
+# la receta del repo central (SharedWorkflows) para empaquetar y subir la imagen.
+# ─────────────────────────────────────────────────────────────
+
 on:
   push:
-    tags: 
+    tags:
+      # Solo cuando el tag parece una versión: v1.0.0, v2.3.4, etc.
       - 'v*.*.*'
 
 jobs:
-  mi-job:
+  usar-receta-compartida:
+    # Aquí no repetimos los pasos de Docker: delegamos al otro repositorio
+    uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
+
+    # Valores que le “pasamos” a la receta (nombre de la imagen y qué versión es)
+    with:
+      image-name: my-api
+      # Mismo nombre que el tag que disparó el workflow (ej. v1.2.3 → la imagen lleva esa “versión”)
+      image-tag: ${{ github.ref_name }}
+
+    # Datos sensibles: usuario y contraseña/token de Docker Hub (configurados en GitHub → Secrets)
     uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
