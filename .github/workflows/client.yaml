@@ -6,14 +6,14 @@
 
 on:
   push:
-    tags:
+    branches:
       # Solo cuando el tag parece una versión: v1.0.0, v2.3.4, etc.
       - 'v*.*.*'
 
 jobs:
   usar-receta-compartida:
     # Aquí no repetimos los pasos de Docker: delegamos al otro repositorio
-    uses: asanchezo-duoc/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
+    uses: Ciclo-vida-S-II/AUY1104-SharedWorkflows/.github/workflows/holamundo.yaml@main
 
     # Valores que le “pasamos” a la receta (nombre de la imagen y qué versión es)
     with:
