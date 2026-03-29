@@ -2,7 +2,7 @@ name: Ejecutar Workflow Reutilizable
 
 on:
   push:
-    branches: ["principal"]
+    branches: ["main"]
 
 jobs:
   usar-receta-compartida:
