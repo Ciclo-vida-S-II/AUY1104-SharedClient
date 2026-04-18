@@ -1,0 +1,30 @@
+name: Release (Tag) - Build & Push Docker Hub
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm test
+
+  publish:
+    needs: tests
+    uses: Ciclo-vida-S-II/AUY1104-SharedWorkflows/.github/workflows/deploy-api.yaml@main
+    with:
+      image-name: "ciclovida-api-edu"
+      image-tag: ${{ github.ref_name }}
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
